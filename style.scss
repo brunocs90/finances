@@ -1,0 +1,157 @@
+$dark-blue: #363f5f;
+$green: #49AA26;
+$light-green: #3dd705;
+$red: #e92929;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 93.75%; /* 15px */
+}
+
+body {
+    background: #f0f2f5;
+    font-family:'Poppins', sans-serif
+}
+
+.container {
+    width: #{"min(90vw, 800px)"};
+    margin: auto;
+}
+
+h2 {
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: $dark-blue;
+
+    font-weight: normal;
+}
+
+header {
+    background: #2D4A22;
+    padding: 2rem 0 10rem;
+    text-align: center;
+
+    #logo {
+        color: #fff;
+        font-weight: 100;
+    }
+}
+
+main {
+    #balance {
+        margin-top: -8rem;
+
+        h2 {
+            color: white;
+            margin-top: 0;
+        }
+    }
+
+    /* Cards ===================== */
+    .card {
+        background: white;
+        padding: 1.5rem 2rem;
+        border-radius: 0.25rem;
+
+        margin-bottom: 2rem;
+        color: $dark-blue;
+
+        h3 {
+            font-weight: normal;
+            font-size: 1rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        p {
+            font-size: 2rem;
+            line-height: 3rem;
+            white-space:nowrap;
+            margin-top: 1rem;
+        }
+    }
+
+    .total {
+        background: $green;
+        color: white;
+    }
+}
+
+/* Table ===================== */
+#transaction {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+#data-table {
+    width: 100%;
+    border-spacing: 0 0.5rem;
+    color: #969cb3;
+}
+
+table thead tr th:first-child,
+table tbody tr td:first-child
+{
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child{
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+table thead th {
+    background: gray;
+    color: white;
+
+    font-weight: normal;
+    padding: 1rem 2rem;
+
+    text-align: left;
+}
+
+table tbody tr {
+    opacity: 0.7
+}
+
+table tbody tr:hover {
+    opacity: 1
+}
+
+table tbody td {
+    background:white;
+    padding: 1rem 2rem;
+}
+
+td.description {
+    color: $dark-blue;
+}
+
+td.income {
+    color: #12a454;
+}
+
+td.expense {
+    color: $red;
+}
+
+
+
+
+footer {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: $dark-blue;
+
+    opacity: 0.6;
+}
+
+
+

@@ -48,6 +48,55 @@ h2 {
     margin: auto;
 }
 
+a {
+    color: $green;
+    text-decoration: none;
+}
+
+a:hover {
+    color: $light-green;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    color: white;
+    background: $green;
+
+    padding: 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: $light-green;
+}
+
+.button.new {
+    display: inline-block;
+    margin-bottom: .8rem;
+}
+
+.button.cancel {
+    color: $red;
+    border: 2px $red solid;
+    border-radius: 0.25rem;
+
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0.6;
+}
+
+.button.cancel:hover {
+    opacity: 1;
+}
+
 main {
     #balance {
         margin-top: -8rem;
@@ -111,7 +160,7 @@ main {
             }
 
             thead th {
-                //background: #969CB2;
+                background: white;
                 color: $textos;
 
                 font-weight: normal;
@@ -148,12 +197,102 @@ main {
     }
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+
+    .modal{
+        background: #F0F2F5;
+        padding: 2.4rem;
+        width: 90%;
+        max-width: 500px;
+        z-index: 1;
+    }
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#form {
+    max-width: 500px;
+
+    h2 {
+        margin-top: 0;
+    }
+
+    input {
+        border: none;
+        border-radius: 0.2rem;
+
+        padding: 0.8rem;
+
+        width: 100%;
+    }
+
+    .input-group {
+        margin-top: 0.8rem;
+    }
+
+    .input-group small{
+        opacity: 0.4;
+    }
+
+    .input-group.actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .input-group.actions .button,
+    .input-group.actions button {
+        width: 48%;
+    }
+}
+
+
+
 footer {
     text-align: center;
     padding: 4rem 0 2rem;
     color: $titulos;
-
     opacity: 0.6;
+}
+
+@media (min-width: 800px) {
+    html {
+        font-size: 87.5%;
+    }
+
+    #balance {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
 }
 
 

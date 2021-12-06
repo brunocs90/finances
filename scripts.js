@@ -87,10 +87,7 @@ const DOM = {
 
 const Utils = {
     formatAmount(value) {
-        console.log('valor de value antes', value);
         value = value * 100;
-        console.log('valor de value', value);
-        console.log('valor de value com math', Math.round(value));
         return Math.round(value);
     },
 

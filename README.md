@@ -3,8 +3,8 @@
 </h1>
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  
   <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
@@ -12,8 +12,17 @@
 <br>
 
 <p align="center">
-  <img alt="dev.finances" src="./assets/devfinances.png" width="100%">
+  <img alt="dev.finances" src="./assets/devfinances.png" width="60%">
 </p>
+
+## 💻 Projeto
+
+O dev.finances é uma aplicação de controle financeiro, onde é possível cadastrar e excluir transações e ver o saldo de entrada e saída 💰
+
+* Site para administrar ganhos e gastos (controle financeiro)
+* Cadastro e exclusão de transações
+* Visualização do saldo de entrada e saída.
+* Alteração de cor na área do card Total (Entradas - Saídas).
 
 ## 🚀 Tecnologias
 
@@ -22,10 +31,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - HTML
 - CSS
 - JavaScript
-
-## 💻 Projeto
-
-O dev.finances é uma aplicação de controle financeiro, onde é possível cadastrar e excluir transações e ver o saldo de entrada e saída 💰
 
 ## 🔖 Layout
 

@@ -7,6 +7,18 @@ const Modal = {
     }
 }
 
+
+const cardTotal = {
+    positive() {
+        document.querySelector(".card.total").classList.remove("negative")
+        document.querySelector(".card.total").classList.add("positive")
+    },
+    negative() {
+        document.querySelector(".card.total").classList.remove("positive")
+        document.querySelector(".card.total").classList.add("negative")
+    }
+}
+
 const Storage = {
     get() {
         return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
@@ -72,6 +84,10 @@ const DOM = {
             </td>
             `
         return html;
+    },
+
+    changeCardColor() {
+        Transaction.total() < 0 ? cardTotal.negative() : cardTotal.positive();
     },
 
     updateBalance() {
@@ -167,7 +183,9 @@ const App = {
             DOM.addTransaction(transaction, index);
         });
 
-        DOM.updateBalance()
+        DOM.updateBalance();
+        DOM.changeCardColor();
+
         Storage.set(Transaction.all)
     },
     reload() {

@@ -132,8 +132,13 @@ main {
         }
     }
 
-    .total {
+    .total.positive {
         background: $green;
+        color: white;
+    }
+
+    .total.negative {
+        background: $red;
         color: white;
     }
 

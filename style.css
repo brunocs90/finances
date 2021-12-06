@@ -135,8 +135,13 @@ main .card p {
   margin-top: 1rem;
 }
 
-main .total {
+main .total.positive {
   background: #49AA26;
+  color: white;
+}
+
+main .total.negative {
+  background: #E92929;
   color: white;
 }
 

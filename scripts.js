@@ -87,8 +87,11 @@ const DOM = {
 
 const Utils = {
     formatAmount(value) {
-        value = Number(value.replace(/\,\./g, "")) * 100;
-        return value;
+        console.log('valor de value antes', value);
+        value = value * 100;
+        console.log('valor de value', value);
+        console.log('valor de value com math', Math.round(value));
+        return Math.round(value);
     },
 
     formatDate(date) {

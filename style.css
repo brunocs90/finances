@@ -285,6 +285,10 @@ main #transaction table td.expense {
   width: 48%;
 }
 
+.fa-edit {
+  color: #969CB3;
+}
+
 footer {
   text-align: center;
   padding: 4rem 0 2rem;

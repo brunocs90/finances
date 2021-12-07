@@ -1,3 +1,4 @@
+let indexOfTransaction = 0;
 const Modal = {
     open() {
         document.querySelector('.modal-overlay').classList.add('active')
@@ -6,7 +7,6 @@ const Modal = {
         document.querySelector('.modal-overlay').classList.remove('active')
     }
 }
-
 
 const cardTotal = {
     positive() {
@@ -32,16 +32,37 @@ const Storage = {
 const Transaction = {
     all: Storage.get(),
 
-    add(transaction) {
-        Transaction.all.push(transaction);
+    add(transaction, index) {
+        console.log('estou editando?', this.editTransaction);
+        if (this.editTransaction) {
+            console.log('qual indice estou editando?', index);
+            console.log('valor do indice', this.all[index]);
+            console.log('valor a ser atualizado', transaction);
+            this.all[index] = transaction;
+        } else {
+            this.all.push(transaction);
+        }
 
+        this.editTransaction = false;
         App.reload();
     },
 
     remove(index) {
-        Transaction.all.splice(index, 1)
-
+        this.all.splice(index, 1)
         App.reload()
+    },
+
+    edit(index) {
+        console.log('estou editando o item', index);
+        this.editTransaction = true;
+        this.indexOfTransaction = index;
+        console.log('estou mudando o valor para ', this.indexOfTransaction);
+        Modal.open();
+
+        const { description, amount, date } = this.all[index];
+        Form.description.value = description;
+        Form.amount.value = Utils.reverseFormatAmount(amount);
+        Form.date.value = Utils.reverseFormatDate(date);
     },
 
     incomes() {
@@ -80,9 +101,17 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
+                <span onclick="Transaction.remove(${index})">
+                    <i class="far fa-trash-alt fa-lg"></i>
+                </span>
+            </td>
+            <td>
+                <span Transaction.indexOfTransaction=${index} onclick="Transaction.edit(${index})">
+                    <i class="far fa-edit fa-lg"></i>
+                </span>
             </td>
             `
+
         return html;
     },
 
@@ -107,9 +136,18 @@ const Utils = {
         return Math.round(value);
     },
 
+    reverseFormatAmount(value) {
+        value = value / 100;
+        return Math.round(value);
+    },
+
     formatDate(date) {
         const splittedDate = date.split("-");
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+    },
+
+    reverseFormatDate(date) {
+        return date.split("/").reverse().join("-");
     },
 
     formatCurrency(value) {
@@ -167,7 +205,7 @@ const Form = {
         try {
             Form.validateFields();
             const transaction = Form.formatValues();
-            Transaction.add(transaction);
+            Transaction.add(transaction, Transaction.indexOfTransaction);
             Form.clearFields();
             Modal.close();
         } catch (error) {
@@ -187,6 +225,8 @@ const App = {
         DOM.changeCardColor();
 
         Storage.set(Transaction.all)
+        this.editTransaction = false;
+        this.indexOfTransaction = 0;
     },
     reload() {
         DOM.clearTransactions()

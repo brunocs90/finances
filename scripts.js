@@ -94,14 +94,12 @@ const DOM = {
             <td class="description">${transaction.description}</td>
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
-            <td>
-                <span onclick="Transaction.remove(${index})">
-                    <i class="far fa-trash-alt fa-lg"></i>
-                </span>
-            </td>
-            <td>
+            <td class="btn-action">
                 <span onclick="Transaction.edit(${index})">
-                    <i class="far fa-edit fa-lg"></i>
+                    <i class="far fa-edit fa-lg btn-edit"></i>
+                </span>
+                <span onclick="Transaction.remove(${index})">
+                    <i class="far fa-trash-alt fa-lg btn-remove"></i>
                 </span>
             </td>
             `;

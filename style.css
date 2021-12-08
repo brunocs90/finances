@@ -16,7 +16,7 @@ body {
 }
 
 body header {
-  background: #2D4A22;
+  background: #42224a;
   padding: 2rem 0 10rem;
 }
 
@@ -30,8 +30,9 @@ body header .containerHeader {
 }
 
 body header .logo {
-  height: 50px;
+  height: 66px;
   width: 200px;
+  margin-top: 15px;
   background: url("./assets/logo.svg") no-repeat;
 }
 
@@ -190,14 +191,29 @@ main #transaction table tbody td {
 
 main #transaction table td.description {
   color: #363f5f;
+  width: 25%;
+  text-align: left;
 }
 
 main #transaction table td.income {
   color: #12a454;
+  width: 25%;
+  text-align: left;
 }
 
 main #transaction table td.expense {
   color: #E92929;
+  width: 25%;
+  text-align: left;
+}
+
+main #transaction table td.date {
+  width: 35%;
+  text-align: left;
+}
+
+main #transaction table td.btn-action {
+  width: 20%;
 }
 
 .sr-only {
@@ -285,7 +301,14 @@ main #transaction table td.expense {
   width: 48%;
 }
 
-.fa-edit {
+.btn-edit {
+  margin-right: 20px;
+  cursor: pointer;
+  color: #969CB3;
+}
+
+.btn-remove {
+  cursor: pointer;
   color: #969CB3;
 }
 

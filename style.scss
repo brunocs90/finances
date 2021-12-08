@@ -4,6 +4,7 @@ $light-green: #3dd705;
 $red: #E92929;
 $textos: #969CB3;
 $background: #F0F2F5;
+$background-header: #42224a;
 
 * {
     margin: 0;
@@ -20,7 +21,7 @@ body {
     font-family:'Poppins', sans-serif;
 
     header {
-        background: #2D4A22;
+        background: $background-header;
         padding: 2rem 0 10rem;
 
         .containerHeader {
@@ -28,10 +29,10 @@ body {
             justify-content: center;
         }
         .logo {
-            height: 50px;
+            height: 66px;
             width: 200px;
+            margin-top: 15px;
             background: url("./assets/logo.svg") no-repeat;
-
         }
     }
 }
@@ -189,14 +190,27 @@ main {
 
             td.description {
                 color: $titulos;
+                width: 25%;
+                text-align: left;
             }
 
             td.income {
                 color: #12a454;
+                width: 25%;
+                text-align: left;
             }
 
             td.expense {
                 color: $red;
+                width: 25%;
+                text-align: left;
+            }
+            td.date {
+                width: 35%;
+                text-align: left;
+            }
+            td.btn-action {
+                width: 20%;
             }
         }
     }
@@ -278,9 +292,17 @@ main {
     }
 }
 
-.fa-edit {
+.btn-edit {
+    margin-right: 20px;
+    cursor: pointer;
     color: $textos;
-  }
+}
+
+.btn-remove {
+    cursor: pointer;
+    color: $textos;
+}
+
 
 
 

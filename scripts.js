@@ -1,11 +1,18 @@
-let indexOfTransaction = 0;
 const Modal = {
     open() {
         document.querySelector('.modal-overlay').classList.add('active')
     },
     close() {
         document.querySelector('.modal-overlay').classList.remove('active')
-    }
+    },
+
+    setValues(transaction, index) {
+        Form.description.value = transaction.description;
+        Form.amount.value = Utils.reverseFormatAmount(transaction.amount);
+        Form.date.value = Utils.reverseFormatDate(transaction.date);
+        Form.edit.value = "true";
+        Form.index = index;
+    },
 }
 
 const cardTotal = {
@@ -32,18 +39,13 @@ const Storage = {
 const Transaction = {
     all: Storage.get(),
 
-    add(transaction, index) {
-        console.log('estou editando?', this.editTransaction);
-        if (this.editTransaction) {
-            console.log('qual indice estou editando?', index);
-            console.log('valor do indice', this.all[index]);
-            console.log('valor a ser atualizado', transaction);
-            this.all[index] = transaction;
+    add(transaction) {
+        if (transaction.edit === "true") {
+            this.all[transaction.index] = transaction;
+            transaction.edit = "false";
         } else {
             this.all.push(transaction);
         }
-
-        this.editTransaction = false;
         App.reload();
     },
 
@@ -53,16 +55,8 @@ const Transaction = {
     },
 
     edit(index) {
-        console.log('estou editando o item', index);
-        this.editTransaction = true;
-        this.indexOfTransaction = index;
-        console.log('estou mudando o valor para ', this.indexOfTransaction);
+        Modal.setValues(this.all[index], index);
         Modal.open();
-
-        const { description, amount, date } = this.all[index];
-        Form.description.value = description;
-        Form.amount.value = Utils.reverseFormatAmount(amount);
-        Form.date.value = Utils.reverseFormatDate(date);
     },
 
     incomes() {
@@ -90,7 +84,7 @@ const DOM = {
         tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
         tr.dataset.index = index;
 
-        DOM.transactionsContainer.appendChild(tr);
+        this.transactionsContainer.appendChild(tr);
     },
 
     innerHTMLTransaction(transaction, index) {
@@ -106,12 +100,11 @@ const DOM = {
                 </span>
             </td>
             <td>
-                <span Transaction.indexOfTransaction=${index} onclick="Transaction.edit(${index})">
+                <span onclick="Transaction.edit(${index})">
                     <i class="far fa-edit fa-lg"></i>
                 </span>
             </td>
-            `
-
+            `;
         return html;
     },
 
@@ -120,13 +113,13 @@ const DOM = {
     },
 
     updateBalance() {
-        document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes())
-        document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses())
-        document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total())
+        document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes());
+        document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses());
+        document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total());
     },
 
     clearTransactions() {
-        DOM.transactionsContainer.innerHTML = ""
+        DOM.transactionsContainer.innerHTML = "";
     }
 }
 
@@ -167,12 +160,16 @@ const Form = {
     description: document.querySelector('input#description'),
     amount: document.querySelector('input#amount'),
     date: document.querySelector('input#date'),
+    edit: document.querySelector('input#edit'),
+    index: document.querySelector('input#edit').dataset.index,
 
     getValues() {
         return {
             description: Form.description.value,
             amount: Form.amount.value,
-            date: Form.date.value
+            date: Form.date.value,
+            edit: Form.edit.value,
+            index: Form.index,
         }
     },
 
@@ -185,18 +182,20 @@ const Form = {
     },
 
     formatValues() {
-        let { description, amount, date } = Form.getValues();
+        let { description, amount, date, edit, index } = Form.getValues();
 
         amount = Utils.formatAmount(amount);
         date = Utils.formatDate(date);
 
-        return { description, amount, date };
+        return { description, amount, date, edit, index };
     },
 
     clearFields() {
         Form.description.value = "";
         Form.amount.value = "";
         Form.date.value = "";
+        Form.edit.value = "false";
+        Form.index = "";
     },
 
     submit(event) {
@@ -204,8 +203,10 @@ const Form = {
 
         try {
             Form.validateFields();
+
             const transaction = Form.formatValues();
-            Transaction.add(transaction, Transaction.indexOfTransaction);
+            Transaction.add(transaction);
+
             Form.clearFields();
             Modal.close();
         } catch (error) {
@@ -224,9 +225,7 @@ const App = {
         DOM.updateBalance();
         DOM.changeCardColor();
 
-        Storage.set(Transaction.all)
-        this.editTransaction = false;
-        this.indexOfTransaction = 0;
+        Storage.set(Transaction.all);
     },
     reload() {
         DOM.clearTransactions()

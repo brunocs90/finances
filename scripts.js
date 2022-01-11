@@ -98,7 +98,7 @@ const DOM = {
                 <span onclick="Transaction.edit(${index})">
                     <i class="far fa-edit fa-lg btn-edit"></i>
                 </span>
-                <span onclick="Transaction.remove(${index})">
+                <span onclick="removerItem(${index})">
                     <i class="far fa-trash-alt fa-lg btn-remove"></i>
                 </span>
             </td>
@@ -118,6 +118,13 @@ const DOM = {
 
     clearTransactions() {
         DOM.transactionsContainer.innerHTML = "";
+    }
+}
+
+function removerItem(index) {
+    var isOk = window.confirm("Deseja realmente remover este item?");
+    if (isOk) {
+        Transaction.remove(index);
     }
 }
 
